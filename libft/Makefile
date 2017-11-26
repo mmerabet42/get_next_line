@@ -53,10 +53,12 @@ _OBJS	=	ft_abs.o \
 			ft_lstatpos.o \
 			ft_lstcopy.o \
 			ft_lstcopyone.o \
+			ft_lstcreate.o \
 			ft_lstdel.o \
 			ft_lstdelone.o \
 			ft_lstend.o \
 			ft_lstfind.o \
+			ft_lstfindbysize.o \
 			ft_lstiter.o \
 			ft_lstmap.o \
 			ft_lstnew.o \

@@ -6,7 +6,7 @@
 /*   By: mmerabet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/09 14:00:22 by mmerabet          #+#    #+#             */
-/*   Updated: 2017/11/23 22:43:22 by mmerabet         ###   ########.fr       */
+/*   Updated: 2017/11/26 15:37:51 by mmerabet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -167,6 +167,7 @@ void				ft_putptr_fd(void *ptr, int fd);
 void				ft_putdouble_fd(double n, int precision, int fd);
 
 t_list				*ft_lstnew(const void *content, size_t content_size);
+t_list				*ft_lstcreate(void *content, size_t content_size);
 void				ft_lstdelone(t_list **alst, void (*del)(void *, size_t));
 void				ft_lstdel(t_list **alst, void (*del)(void *, size_t));
 void				ft_lstadd(t_list **alst, t_list *elem);
@@ -178,6 +179,7 @@ t_list				*ft_lstatpos(t_list *lst, int i);
 t_list				*ft_lstfind(t_list *lst,
 							const void *content,
 							size_t content_size);
+t_list				*ft_lstfindbysize(t_list *lst, size_t content_size);
 size_t				ft_lstsize(t_list *lst);
 t_list				*ft_lstend(t_list *lst);
 t_list				*ft_lstcopy(t_list *lst);
