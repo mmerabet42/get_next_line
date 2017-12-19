@@ -1,28 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.h                                    :+:      :+:    :+:   */
+/*   handler_b.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mmerabet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/11/23 22:48:49 by mmerabet          #+#    #+#             */
-/*   Updated: 2017/12/18 23:41:46 by mmerabet         ###   ########.fr       */
+/*   Created: 2017/12/11 14:48:07 by mmerabet          #+#    #+#             */
+/*   Updated: 2017/12/14 23:29:09 by mmerabet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GET_NEXT_LINE_H
-# define GET_NEXT_LINE_H
-# define BUFF_SIZE 64
+#include "handlers.h"
 
-# include "libft.h"
-
-typedef struct	s_fd
+char	*handler_b(va_list lst, t_printf_params params)
 {
-	int			fd;
-	int			len;
-	char		buffer[BUFF_SIZE + 1];
-}				t_fd;
+	char				*str;
 
-int				get_next_line(const int fd, char **line);
+	str = ft_ulltoa_cbase(proper_cast_u(lst, params), FT_BIN);
+	return (perform_width(pad_zeroes(str, &params), &params));
+}
 
-#endif
+char	*handler_n(va_list lst, t_printf_params params)
+{
+	int	*n;
+
+	if ((n = (int *)va_arg(lst, int *)))
+		*n = ft_strlen(params.current_buffer);
+	return (ft_strnew(0));
+}

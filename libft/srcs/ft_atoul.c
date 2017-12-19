@@ -1,28 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.h                                    :+:      :+:    :+:   */
+/*   ft_atoul.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mmerabet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/11/23 22:48:49 by mmerabet          #+#    #+#             */
-/*   Updated: 2017/12/18 23:41:46 by mmerabet         ###   ########.fr       */
+/*   Created: 2017/12/03 14:01:04 by mmerabet          #+#    #+#             */
+/*   Updated: 2017/12/03 14:01:27 by mmerabet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GET_NEXT_LINE_H
-# define GET_NEXT_LINE_H
-# define BUFF_SIZE 64
+#include "libft.h"
 
-# include "libft.h"
-
-typedef struct	s_fd
+unsigned long	ft_atoul(const char *s)
 {
-	int			fd;
-	int			len;
-	char		buffer[BUFF_SIZE + 1];
-}				t_fd;
+	unsigned long	nb;
 
-int				get_next_line(const int fd, char **line);
-
-#endif
+	if (!s)
+		return (0);
+	nb = 0;
+	while (ft_isspace(*s))
+		++s;
+	while (ft_isdigit(*s))
+		nb = nb * 10 + (*s++ - 48);
+	return (nb);
+}

@@ -1,28 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.h                                    :+:      :+:    :+:   */
+/*   ft_btree_del.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mmerabet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/11/23 22:48:49 by mmerabet          #+#    #+#             */
-/*   Updated: 2017/12/18 23:41:46 by mmerabet         ###   ########.fr       */
+/*   Created: 2017/11/12 13:38:13 by mmerabet          #+#    #+#             */
+/*   Updated: 2017/11/28 16:38:50 by mmerabet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GET_NEXT_LINE_H
-# define GET_NEXT_LINE_H
-# define BUFF_SIZE 64
+#include "libft.h"
 
-# include "libft.h"
-
-typedef struct	s_fd
+void	ft_btree_del(t_btree **abt, void (*del)(void *, size_t))
 {
-	int			fd;
-	int			len;
-	char		buffer[BUFF_SIZE + 1];
-}				t_fd;
+	t_btree	*left;
+	t_btree *right;
 
-int				get_next_line(const int fd, char **line);
-
-#endif
+	left = NULL;
+	right = NULL;
+	if (abt && *abt)
+	{
+		left = (*abt)->left;
+		right = (*abt)->right;
+		ft_btree_delone(abt, del);
+		if (left)
+			ft_btree_del(&left, del);
+		if (right)
+			ft_btree_del(&right, del);
+	}
+}

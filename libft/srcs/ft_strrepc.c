@@ -1,28 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.h                                    :+:      :+:    :+:   */
+/*   ft_strrepc.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mmerabet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/11/23 22:48:49 by mmerabet          #+#    #+#             */
-/*   Updated: 2017/12/18 23:41:46 by mmerabet         ###   ########.fr       */
+/*   Created: 2017/12/08 19:02:11 by mmerabet          #+#    #+#             */
+/*   Updated: 2017/12/09 18:25:33 by mmerabet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GET_NEXT_LINE_H
-# define GET_NEXT_LINE_H
-# define BUFF_SIZE 64
+#include "libft.h"
 
-# include "libft.h"
-
-typedef struct	s_fd
+char	*ft_strrepc(char *s, char a, char b)
 {
-	int			fd;
-	int			len;
-	char		buffer[BUFF_SIZE + 1];
-}				t_fd;
+	char	*it;
 
-int				get_next_line(const int fd, char **line);
-
-#endif
+	if (!(it = s))
+		return (NULL);
+	while (*it)
+	{
+		if (*it == a)
+			*it = b;
+		++it;
+	}
+	return (s);
+}

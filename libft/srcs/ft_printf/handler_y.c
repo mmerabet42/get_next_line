@@ -1,28 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.h                                    :+:      :+:    :+:   */
+/*   handler_q.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mmerabet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/11/23 22:48:49 by mmerabet          #+#    #+#             */
-/*   Updated: 2017/12/18 23:41:46 by mmerabet         ###   ########.fr       */
+/*   Created: 2017/12/11 20:58:10 by mmerabet          #+#    #+#             */
+/*   Updated: 2017/12/16 20:56:22 by mmerabet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GET_NEXT_LINE_H
-# define GET_NEXT_LINE_H
-# define BUFF_SIZE 64
+#include "handlers.h"
 
-# include "libft.h"
-
-typedef struct	s_fd
+char	*handler_y(va_list lst, t_printf_params params)
 {
-	int			fd;
-	int			len;
-	char		buffer[BUFF_SIZE + 1];
-}				t_fd;
+	char				*str;
+	char				*base;
+	unsigned long long	n;
 
-int				get_next_line(const int fd, char **line);
-
-#endif
+	n = proper_cast_u(lst, params);
+	base = (char *)va_arg(lst, char *);
+	if (params.precision_spec && params.precision == 0 && n == 0)
+		str = ft_strnew(0);
+	else
+		str = ft_ulltoa_cbase(n, base);
+	return (perform_width(pad_zeroes(str, &params), &params));
+}

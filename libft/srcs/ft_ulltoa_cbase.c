@@ -1,28 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.h                                    :+:      :+:    :+:   */
+/*   ft_ulltoa_cbase.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mmerabet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/11/23 22:48:49 by mmerabet          #+#    #+#             */
-/*   Updated: 2017/12/18 23:41:46 by mmerabet         ###   ########.fr       */
+/*   Created: 2017/12/03 13:37:02 by mmerabet          #+#    #+#             */
+/*   Updated: 2017/12/11 15:02:39 by mmerabet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GET_NEXT_LINE_H
-# define GET_NEXT_LINE_H
-# define BUFF_SIZE 64
+#include "libft.h"
 
-# include "libft.h"
-
-typedef struct	s_fd
+char	*ft_ulltoa_cbase(unsigned long long n, const char *base)
 {
-	int			fd;
-	int			len;
-	char		buffer[BUFF_SIZE + 1];
-}				t_fd;
+	char				*str;
+	int					baselen;
+	int					i;
+	unsigned long long	nc;
 
-int				get_next_line(const int fd, char **line);
-
-#endif
+	if (!base)
+		return (NULL);
+	baselen = ft_strlen(base);
+	i = 1;
+	nc = n;
+	while (nc /= baselen)
+		++i;
+	if ((str = ft_strnew(i)) == NULL)
+		return (NULL);
+	while (--i >= 0)
+	{
+		str[i] = base[ft_abs(n % baselen)];
+		n /= baselen;
+	}
+	return (str);
+}

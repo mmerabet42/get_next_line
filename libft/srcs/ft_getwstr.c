@@ -1,28 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.h                                    :+:      :+:    :+:   */
+/*   ft_getwstr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mmerabet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/11/23 22:48:49 by mmerabet          #+#    #+#             */
-/*   Updated: 2017/12/18 23:41:46 by mmerabet         ###   ########.fr       */
+/*   Created: 2017/12/11 19:27:31 by mmerabet          #+#    #+#             */
+/*   Updated: 2017/12/12 16:00:13 by mmerabet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GET_NEXT_LINE_H
-# define GET_NEXT_LINE_H
-# define BUFF_SIZE 64
+#include "libft.h"
 
-# include "libft.h"
-
-typedef struct	s_fd
+char	*ft_getwstr(const wchar_t *wcs)
 {
-	int			fd;
-	int			len;
-	char		buffer[BUFF_SIZE + 1];
-}				t_fd;
+	char	*str;
+	char	*wc;
 
-int				get_next_line(const int fd, char **line);
-
-#endif
+	str = ft_strnew(0);
+	if (!wcs)
+		return (NULL);
+	while (*wcs)
+	{
+		if (!(wc = ft_getwchar(*wcs++)))
+		{
+			free(str);
+			return (NULL);
+		}
+		str = ft_strjoin_clr(str, wc, 2);
+	}
+	return (str);
+}

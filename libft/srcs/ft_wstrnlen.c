@@ -1,28 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.h                                    :+:      :+:    :+:   */
+/*   ft_wstrnlen.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mmerabet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/11/23 22:48:49 by mmerabet          #+#    #+#             */
-/*   Updated: 2017/12/18 23:41:46 by mmerabet         ###   ########.fr       */
+/*   Created: 2017/12/11 21:55:45 by mmerabet          #+#    #+#             */
+/*   Updated: 2017/12/12 16:35:01 by mmerabet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GET_NEXT_LINE_H
-# define GET_NEXT_LINE_H
-# define BUFF_SIZE 64
+#include "libft.h"
 
-# include "libft.h"
-
-typedef struct	s_fd
+int	ft_wstrnlen(const wchar_t *wstr, int n)
 {
-	int			fd;
-	int			len;
-	char		buffer[BUFF_SIZE + 1];
-}				t_fd;
+	int	i;
+	int	len;
 
-int				get_next_line(const int fd, char **line);
-
-#endif
+	i = 0;
+	len = 0;
+	if (wstr)
+	{
+		while (*wstr && i + len <= n)
+		{
+			if ((len = ft_wcharlen(*wstr++)) == 0)
+				return (-1);
+			if (i + len > n)
+				return (i);
+			i += len;
+		}
+	}
+	return (i);
+}
